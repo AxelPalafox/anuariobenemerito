@@ -1,0 +1,319 @@
+/* Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Encabezado - ROJO ESCOLAR */
+.main-header {
+    background-color: #A6192E; /* Rojo elegante */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.logo-container img {
+    width: 100px;
+    height: auto;
+}
+
+.header-text {
+    text-align: center;
+}
+
+.header-text h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.alumnos {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fadbdb; /* Tono claro para contrastar con el rojo */
+}
+
+/* Sección del Título del Anuario */
+.hero-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.anuario-title {
+    font-size: 80px;
+    letter-spacing: 5px;
+    color: #A6192E; /* Título principal en rojo */
+}
+
+.ano-title {
+    font-size: 40px;
+    color: #666;
+}
+
+/* Cuadrícula de Alumnos */
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+/* Tarjetas de cada alumno */
+.student-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.photo-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #A6192E; /* Borde rojo */
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-card h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* Botones en Rojo */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.toggleButton, .galleryButton {
+    background-color: #A6192E; /* Botones rojos */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.toggleButton:hover, .galleryButton:hover {
+    background-color: #801323; /* Rojo más oscuro */
+}
+
+/* Información oculta */
+.infoDiv {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para la galería oculta (que se mostrará en el modal) */
+.student-gallery {
+    margin-top: 15px;
+    border-top: 1px dashed #ccc;
+    padding-top: 15px;
+}
+
+.student-gallery h4 {
+    margin-bottom: 10px;
+    color: #A6192E;
+    font-size: 14px;
+}
+
+.gallery-images {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.gallery-images img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    cursor: pointer; /* Indicar que se puede hacer clic */
+    transition: transform 0.2s;
+}
+
+/* Modales para Galería de casi pantalla completa */
+.gallery-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilitar desplazamiento si el contenido es grande */
+    background-color: rgba(0,0,0,0.9); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% desde arriba, centrado horiz. */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%; /* Casi toda la pantalla de ancho */
+    max-width: 1000px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover, .close-modal:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    color: #A6192E;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-gallery-container .student-gallery {
+    border: none;
+    padding: 0;
+}
+
+.modal-gallery-container .gallery-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Rejilla de fotos grandes */
+    gap: 20px;
+    overflow-x: visible; /* No necesitamos desplazamiento horiz. */
+}
+
+.modal-gallery-container .gallery-images img {
+    width: 100%;
+    height: 200px; /* Fotos más grandes */
+}
+
+/* Modal Lightbox para foto individual */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000; /* Por encima de todo, incluso de la galería */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.95);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 900px;
+    max-height: 80%; /* Para que no ocupe todo verticalmente */
+    object-fit: contain; /* Mantener la proporción de la foto */
+    border-radius: 10px;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-lightbox:hover, .close-lightbox:focus {
+    color: #A6192E;
+}
+
+/* Animación para los modales */
+.modal-content, .lightbox-content {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* Pie de Página */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+}
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: white; /* Color inicial de los iconos */
+    font-size: 40px; /* Tamaño de los iconos de Font Awesome */
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #A6192E; /* Cambiar a rojo al pasar el mouse */
+}
+
+/* Adaptación para celulares muy pequeños */
+@media (max-width: 600px) {
+    .header-text h1 {
+        font-size: 24px;
+    }
+    .anuario-title {
+        font-size: 50px;
+    }
+    .ano-title {
+        font-size: 25px;
+    }
+}
