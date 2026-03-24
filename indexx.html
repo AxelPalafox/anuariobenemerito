@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anuario - Eventos Escolares</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+/* BASE */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;
+    color: #111;
+}
+
+/* HEADER */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: #0b0b0b;
+    border-bottom: 2px solid #c5a46d;
+}
+
+.header-text h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin: 0;
+    color: white;
+}
+
+.alumnos {
+    font-size: 12px;
+    color: #c5a46d;
+}
+
+.logo-container img {
+    width: 55px;
+    filter: brightness(0) invert(1); /* hace el logo blanco si es oscuro */
+}
+
+/* HERO */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.anuario-title {
+    font-size: 48px;
+    letter-spacing: 6px;
+    margin: 0;
+}
+
+.ano-title {
+    color: #c5a46d;
+    margin-top: 10px;
+}
+
+/* GRID */
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 40px;
+}
+
+/* CARD */
+.student-card {
+    border: 1px solid #eee;
+    padding: 20px;
+    transition: 0.3s;
+    background: #fff;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+    border-color: #c5a46d;
+}
+
+/* IMAGE */
+.photo-container img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* TITLE */
+.student-card h2 {
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+/* BUTTONS */
+.card-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #111;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #111;
+    color: #fff;
+}
+
+.galleryButton {
+    border-color: #c5a46d;
+    color: #c5a46d;
+}
+
+.galleryButton:hover {
+    background: #c5a46d;
+    color: white;
+}
+
+/* INFO */
+.hidden {
+    display: none;
+}
+
+.infoDiv {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* GALLERY */
+.gallery-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.gallery-images img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* MODALS */
+.gallery-modal, .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    top: 0;
+    left: 0;
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.close-modal, .close-lightbox {
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* LIGHTBOX */
+.lightbox-content {
+    display: block;
+    margin: 80px auto;
+    max-width: 80%;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #0b0b0b;
+    color: #fff;
+    border-top: 2px solid #c5a46d;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.footer i {
+    margin: 10px;
+    color: #c5a46d;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.footer i:hover {
+    color: #ffffff;
+    transform: scale(1.2);
+}
+</style>
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="logo-container">
+        <img src="1.png">
+    </div>
+    <div class="header-text">
+        <h1>COLEGIO BENEMÉRITO DE LAS AMÉRICAS</h1>
+        <p class="alumnos">Eventos Escolares</p>
+    </div>
+</header>
+
+<section class="hero-section">
+    <h2 class="anuario-title">ANUARIO</h2>
+    <h3 class="ano-title">2025 - 2026</h3>
+</section>
+
+<main class="students-grid">
+    <article class="student-card">
+            <div class="photo-container">
+                <img src="1.png" alt="Foto Alumno 3"> 
+            </div>
+            <h2>16 de Setiembre</h2>
+            <div class="card-buttons">
+                <button class="toggleButton" onclick="toggleInfo(this)">Ver información</button>
+                <button class="galleryButton" onclick="openGalleryModal(this)">Ver Galería</button>
+            </div>
+            
+            <div class="infoDiv hidden">
+                <p><strong>Que se hace:</strong> En estos eventos se conmemora las fechas parias mexicanas en el colegio y se tiene una ceremonia especial donde hay bailable folkloricos y comida tipica mexicana en la coperativa.</p>
+                
+                <div class="student-gallery">
+                    <h4>Mis mejores momentos:</h4>
+                    <div class="gallery-images">
+                        <img src="1.png" alt="Recuerdo Carlos 1" onclick="openSinglePhotoLightbox(this)">
+                        <img src="1.png" alt="Recuerdo Carlos 2" onclick="openSinglePhotoLightbox(this)">
+                        <img src="1.png" alt="Recuerdo Carlos 3" onclick="openSinglePhotoLightbox(this)">
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="student-card">
+            <div class="photo-container">
+                <img src="1.png" alt="Foto Alumna 4">
+            </div>
+            <h2>Halloween</h2>
+            <div class="card-buttons">
+                <button class="toggleButton" onclick="toggleInfo(this)">Ver información</button>
+                <button class="galleryButton" onclick="openGalleryModal(this)">Ver Galería</button>
+            </div>
+            
+            <div class="infoDiv hidden">
+                <p><strong>Que se hace:</strong> Esta es una tradicion de Estados Unidos que igual como se es frontera muchos igual deean celebrar esto, en la escuela se hacen las actividades de concurso de disfraces que aqui participa toda la escuela en los 4 nivels de educacio. Por parte de las clases de ingles en prepa se hace decoracion de calabazas y creacion de espantapajaros.</p>
+                
+                <div class="student-gallery">
+                    <h4>Mis mejores momentos:</h4>
+                    <div class="gallery-images">
+                        <img src="1.png" alt="Recuerdo Sofía 1" onclick="openSinglePhotoLightbox(this)">
+                        <img src="1.png" alt="Recuerdo Sofía 2" onclick="openSinglePhotoLightbox(this)">
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="student-card">
+            <div class="photo-container">
+                <img src="1.png" alt="Foto Alumno 5">
+            </div>
+            <h2>Posada Navideña</h2>
+            <div class="card-buttons">
+                <button class="toggleButton" onclick="toggleInfo(this)">Ver información</button>
+                <button class="galleryButton" onclick="openGalleryModal(this)">Ver Galería</button>
+            </div>
+            
+            <div class="infoDiv hidden">
+                <p><strong>Que se hace:</strong> Esta es la ultima actividad que se hace antes de salir de vacaciones. Los alumnos por salon se ponen de acuerdo con sus tutores para decidir que van a llevar ese dia y se tiene un pequeño convivio en el salon donde se hacen actividades y pasar tiempo entre amigos.</p>
+                
+                <div class="student-gallery">
+                    <h4>Mis mejores momentos:</h4>
+                    <div class="gallery-images">
+                        <img src="1.png" alt="Recuerdo Diego 1" onclick="openSinglePhotoLightbox(this)">
+                        <img src="1.png" alt="Recuerdo Diego 2" onclick="openSinglePhotoLightbox(this)">
+                    </div>
+                </div>
+            </div>
+        </article>
+
+<!-- EVENTO -->
+<article class="student-card">
+    <div class="photo-container">
+        <img src="foto2ingles.jpg">
+    </div>
+    <h2>Eventos de Inglés</h2>
+
+    <div class="card-buttons">
+        <button onclick="toggleInfo(this)">Info</button>
+        <button class="galleryButton" onclick="openGalleryModal(this)">Galería</button>
+    </div>
+
+    <div class="infoDiv hidden">
+        <p>Actividades y concursos en inglés.</p>
+        <div class="gallery-images">
+            <img src="foto1ingles.jpg" onclick="openSinglePhotoLightbox(this)">
+            <img src="1.png" onclick="openSinglePhotoLightbox(this)">
+        </div>
+    </div>
+</article>
+
+<article class="student-card">
+    <div class="photo-container">
+        <img src="viaje1.jpg">
+    </div>
+    <h2>Viajes Escolares</h2>
+
+    <div class="card-buttons">
+        <button onclick="toggleInfo(this)">Info</button>
+        <button class="galleryButton" onclick="openGalleryModal(this)">Galería</button>
+    </div>
+
+    <div class="infoDiv hidden">
+        <p>Excursiones educativas.</p>
+        <div class="gallery-images">
+            <img src="1.png">
+            <img src="1.png">
+        </div>
+    </div>
+</article>
+
+<article class="student-card">
+    <div class="photo-container">
+        <img src="club1.jpg">
+    </div>
+    <h2>Actividades Clubs</h2>
+
+    <div class="card-buttons">
+        <button onclick="toggleInfo(this)">Info</button>
+        <button class="galleryButton" onclick="openGalleryModal(this)">Galería</button>
+    </div>
+
+    <div class="infoDiv hidden">
+        <p>Celebraciones escolares.</p>
+        <div class="gallery-images">
+            <img src="1.png">
+            <img src="1.png">
+        </div>
+    </div>
+</article>
+
+</main>
+
+<!-- MODALS -->
+<div id="gallery-modal" class="gallery-modal">
+    <div class="modal-content"></div>
+</div>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightboxModal()">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<footer class="footer">
+    <p>Síguenos</p>
+    <i class="fa-brands fa-facebook"></i>
+    <i class="fa-brands fa-instagram"></i>
+</footer>
+
+<script>
+
+function toggleInfo(btn){
+    const card = btn.closest('.student-card');
+    const info = card.querySelector('.infoDiv');
+    info.classList.toggle('hidden');
+}
+
+function openGalleryModal(btn){
+    const card = btn.closest('.student-card');
+    const content = card.querySelector('.gallery-images').innerHTML;
+
+    const modal = document.getElementById('gallery-modal');
+    modal.querySelector('.modal-content').innerHTML = `
+        <span class="close-modal" onclick="closeGalleryModal()">&times;</span>
+        ${content}
+    `;
+
+    modal.style.display = 'block';
+}
+
+function closeGalleryModal(){
+    document.getElementById('gallery-modal').style.display = 'none';
+}
+
+function openSinglePhotoLightbox(img){
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img');
+
+    modalImg.src = img.src;
+    modal.style.display = 'block';
+}
+
+function closeLightboxModal(){
+    document.getElementById('lightbox-modal').style.display = 'none';
+}
+
+window.onclick = function(e){
+    if(e.target.id === 'gallery-modal') closeGalleryModal();
+    if(e.target.id === 'lightbox-modal') closeLightboxModal();
+}
+
+</script>
+
+</body>
+</html>
+
