@@ -175,7 +175,7 @@ button:hover {
     background-color: #801323;
 }
 
-/* 🔥 BOTÓN GALERÍA COMO LINK */
+/* BOTÓN GALERÍA */
 .galleryButton {
     background-color: #A6192E;
     color: white;
@@ -201,12 +201,31 @@ button:hover {
     display: none;
 }
 
+/* 🔻 FOOTER REDES */
+.footer {
+    background: #A6192E;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer a {
+    color: white;
+    font-size: 25px;
+    margin: 0 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #fadbdb;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- BOTÓN REGRESO -->
 <a href="javascript:history.back()" class="back-button">
     <i class="fa-solid fa-arrow-left"></i> Regresar
 </a>
@@ -229,64 +248,64 @@ button:hover {
 <!-- 1 -->
 <article class="student-card">
     <div class="photo-container"><img src="1.png"></div>
-    <h2>Juan Pérez</h2>
+    <h2>1ro y 2do semestre</h2>
     <div class="card-buttons">
         <button onclick="toggleInfo(this)">Ver información</button>
         <a href="galeria.html" class="galleryButton">Galería</a>
     </div>
     <div class="infoDiv hidden">
-        <p><strong>Frase:</strong> "El respeto es la paz."</p>
+        <p><strong>Frase:</strong> "El primer paso es el más importante."</p>
     </div>
 </article>
 
 <!-- 2 -->
 <article class="student-card">
     <div class="photo-container"><img src="1.png"></div>
-    <h2>María Gómez</h2>
+    <h2>3ro y 4to semestre</h2>
     <div class="card-buttons">
         <button onclick="toggleInfo(this)">Ver información</button>
-        <a href="galeria.html" class="galleryButton">Galería</a>
+        <a href="galeria1.html" class="galleryButton">Galería</a>
     </div>
     <div class="infoDiv hidden">
-        <p><strong>Frase:</strong> "Nunca dejes de aprender."</p>
+        <p><strong>Frase:</strong> "Seguimos avanzando sin rendirnos."</p>
     </div>
 </article>
 
 <!-- 3 -->
 <article class="student-card">
     <div class="photo-container"><img src="1.png"></div>
-    <h2>Carlos López</h2>
+    <h2>5to y 6to semestre</h2>
     <div class="card-buttons">
         <button onclick="toggleInfo(this)">Ver información</button>
-        <a href="galeria.html" class="galleryButton">Galería</a>
+        <a href="galeria2.html" class="galleryButton">Galería</a>
     </div>
     <div class="infoDiv hidden">
-        <p><strong>Frase:</strong> "El éxito es constancia."</p>
+        <p><strong>Frase:</strong> "Hoy cerramos un capítulo, mañana escribimos otro."</p>
     </div>
 </article>
 
 <!-- 4 -->
 <article class="student-card">
     <div class="photo-container"><img src="1.png"></div>
-    <h2>Ana Martínez</h2>
+    <h2>Actividades</h2>
     <div class="card-buttons">
-        <button onclick="toggleInfo(this)">Ver información</button>
-        <a href="galeria.html" class="galleryButton">Galería</a>
-    </div>
-    <div class="infoDiv hidden">
-        <p><strong>Frase:</strong> "Siempre da lo mejor de ti."</p>
+        <a href="galeria3.html" class="galleryButton">Galería</a>
     </div>
 </article>
 
 </main>
 
-<script>
+<!-- 🔻 REDES SOCIALES -->
+<footer class="footer">
+    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/ColegioBenemeritoDeLasAmericas" target="_blank"><i class="fab fa-facebook"></i></a>
+</footer>
 
+<script>
 function toggleInfo(btn){
     const info = btn.closest('.student-card').querySelector('.infoDiv');
     info.classList.toggle('hidden');
 }
-
 </script>
 
 </body>
