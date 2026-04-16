@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería Escolar</title>
+
+<style>
+
+/* ===== BASE ===== */
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f7f6;
+}
+
+/* HEADER */
+.header {
+    background: #A6192E;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* BOTÓN REGRESO */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #A6192E;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+
+/* TITULO */
+.title {
+    text-align: center;
+    font-size: 50px;
+    color: #A6192E;
+    margin: 20px;
+}
+
+/* GRID GALERIA */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+/* CUADROS MEDIANOS */
+.item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+
+.item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.caption {
+    padding: 10px;
+    text-align: center;
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+.lightbox .controls {
+    margin-top: 15px;
+}
+
+.lightbox button {
+    background: #A6192E;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="back-button">⬅ Regresar</a>
+
+<div class="header">
+    <h1>GALERÍA ESCOLAR</h1>
+</div>
+
+<h2 class="title">Momentos</h2>
+
+<div class="gallery-grid">
+
+    <div class="item" onclick="openGallery(0)">
+        <img src="Fernando Guerrero.png">
+        <div class="caption">Fernando Guerrero</div>
+    </div>
+
+    <div class="item" onclick="openGallery(1)">
+        <img src="Noe Adrian.png">
+        <div class="caption">Noe Adrian García</div>
+    </div>
+
+    <div class="item" onclick="openGallery(2)">
+        <img src="Mariana Celaya.png">
+        <div class="caption">Mariana Celaya</div>
+    </div>
+
+    <div class="item" onclick="openGallery(3)">
+        <img src="Minna Anaya.png">
+        <div class="caption">Minna Anaya</div>
+    </div>
+    <div class="item" onclick="openGallery(4)">
+        <img src="Kenai Aguilera.png">
+        <div class="caption">Kenai Aguilera</div>
+    </div>
+
+    <div class="item" onclick="openGallery(5)">
+        <img src="Diego Kaled Lopez.png">
+        <div class="caption">Diego Kaled López</div>
+    </div>
+
+    <div class="item" onclick="openGallery(6)">
+        <img src="Paulina .png">
+        <div class="caption">Paulina Galaz</div>
+    </div>
+
+    <div class="item" onclick="openGallery(7)">
+        <img src="Ivanna .png">
+        <div class="caption">Ivanna</div>
+    </div>
+    <div class="item" onclick="openGallery(8)">
+        <img src="Mia Lucero.png">
+        <div class="caption">Mia Lucero</div>
+    </div>
+
+    <div class="item" onclick="openGallery(9)">
+        <img src="Dayra.png">
+        <div class="caption">Dayra Becerril</div>
+    </div>
+
+    <div class="item" onclick="openGallery(10)">
+        <img src="Kim.png">
+        <div class="caption">Kim Gardea</div>
+    </div>
+
+    <div class="item" onclick="openGallery(11)">
+        <img src="Michelle.png">
+        <div class="caption">Michelle Ramírez</div>
+    </div>
+    <div class="item" onclick="openGallery(12)">
+        <img src="Mayte.png">
+        <div class="caption">Mayte Nieblas</div>
+    </div>
+
+    <div class="item" onclick="openGallery(13)">
+        <img src="Noe Adrian.png">
+        <div class="caption">Noe Adrian García</div>
+    </div>
+
+    <div class="item" onclick="openGallery(14)">
+        <img src="Mariana Celaya.png">
+        <div class="caption">Mariana Celaya</div>
+    </div>
+
+    <div class="item" onclick="openGallery(15)">
+        <img src="Minna Anaya.png">
+        <div class="caption">Minna Anaya</div>
+    </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img">
+    <div class="controls">
+        <button onclick="prevImage()">⬅</button>
+        <button onclick="nextImage()">➡</button>
+        <button onclick="closeLightbox()">Cerrar</button>
+    </div>
+</div>
+
+<script>
+
+// 🔥 GALERÍAS (pon aquí tus fotos reales)
+const galleries = [
+    ["Fernando Guerrero.png"], 
+    ["Noe Adrian.png"],         
+    ["Mariana Celaya.png"], 
+    ["Minna Anaya.png"],
+    ["Kenai Aguilera.png"],
+    ["Diego Kaled Lopez.png"],
+    ["Paulina .png"],  
+    ["Ivanna .png"], 
+    ["Mia Lucero.png"],         
+    ["Dayra.png"], 
+    ["Kim.png"],
+    ["Michelle.png"],
+    ["Mayte.png"],
+    ["Paulina.png"],        
+];
+
+let currentGallery = [];
+let currentIndex = 0;
+
+function openGallery(index){
+    currentGallery = galleries[index];
+    currentIndex = 0;
+    document.getElementById("lightbox").style.display = "flex";
+    showImage();
+}
+
+function showImage(){
+    document.getElementById("lightbox-img").src = currentGallery[currentIndex];
+}
+
+function nextImage(){
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    showImage();
+}
+
+function prevImage(){
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    showImage();
+}
+
+function closeLightbox(){
+    document.getElementById("lightbox").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
