@@ -99,73 +99,23 @@ button {
 
 <div class="gallery-grid">
 
-<div class="item" onclick="openGallery(0)">
-<img src="imagenuno.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(1)">
-<img src="imagendos.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(2)">
-<img src="imagentres.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(3)">
-<img src="imagencuatro.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(4)">
-<img src="imagencinco.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(5)">
-<img src="imagenseis.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(6)">
-<img src="imagensiete.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(7)">
-<img src="imagenocho.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(8)">
-<img src="imagennueve.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(9)">
-<img src="imagendiez.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(10)">
-<img src="imagenonce.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(11)">
-<img src="imagendoce.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(12)">
-<img src="imagentrece.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(13)">
-<img src="imagencatorce.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(14)">
-<img src="imagenquince.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(15)">
-<img src="imagendieciseis.jpeg">
-</div>
-
-<div class="item" onclick="openGallery(16)">
-<img src="imagendiecisiete.jpeg">
-</div>
+<div class="item" onclick="openImage(0)"><img src="imagenuno.jpeg"></div>
+<div class="item" onclick="openImage(1)"><img src="imagendos.jpeg"></div>
+<div class="item" onclick="openImage(2)"><img src="imagentres.jpeg"></div>
+<div class="item" onclick="openImage(3)"><img src="imagencuatro.jpeg"></div>
+<div class="item" onclick="openImage(4)"><img src="imagencinco.jpeg"></div>
+<div class="item" onclick="openImage(5)"><img src="imagenseis.jpeg"></div>
+<div class="item" onclick="openImage(6)"><img src="imagensiete.jpeg"></div>
+<div class="item" onclick="openImage(7)"><img src="imagenocho.jpeg"></div>
+<div class="item" onclick="openImage(8)"><img src="imagennueve.jpeg"></div>
+<div class="item" onclick="openImage(9)"><img src="imagendiez.jpeg"></div>
+<div class="item" onclick="openImage(10)"><img src="imagenonce.jpeg"></div>
+<div class="item" onclick="openImage(11)"><img src="imagendoce.jpeg"></div>
+<div class="item" onclick="openImage(12)"><img src="imagentrece.jpeg"></div>
+<div class="item" onclick="openImage(13)"><img src="imagencatorce.jpeg"></div>
+<div class="item" onclick="openImage(14)"><img src="imagenquince.jpeg"></div>
+<div class="item" onclick="openImage(15)"><img src="imagendieciseis.jpeg"></div>
+<div class="item" onclick="openImage(16)"><img src="imagendiecisiete.jpeg"></div>
 
 </div>
 
@@ -181,48 +131,46 @@ button {
 
 <script>
 
-// 🔥 AHORA CADA ALUMNO TIENE VARIAS IMÁGENES
-const galleries = [
-["imagenuno.jpeg","imagenuno.jpeg","imagenuno3.jpeg"],
-["imagendos.jpeg","imagendos2.jpeg"],
-["imagentres.jpeg","imagentres2.jpeg"],
-["imagencuatro.jpeg","imagencuatro2.jpeg"],
-["imagencinco.jpeg","imagencinco2.jpeg"],
-["imagenseis.jpeg","imagenseis2.jpeg"],
-["imagensiete.jpeg","imagensiete2.jpeg"],
-["imagenocho.jpeg","imagenocho2.jpeg"],
-["imagennueve.jpeg","imagennueve2.jpeg"],
-["imagendiez.jpeg","imagendiez2.jpeg"],
-["imagenonce.jpeg","imagenonce2.jpeg"],
-["imagendoce.jpeg","imagendoce2.jpeg"],
-["imagentrece.jpeg","imagentrece2.jpeg"],
-["imagencatorce.jpeg","imagencatorce2.jpeg"],
-["imagenquince.jpeg","imagenquince2.jpeg"],
-["imagendieciseis.jpeg","imagendieciseis2.jpeg"],
-["imagendiecisiete.jpeg","imagendiecisiete2.jpeg"]
+// 🔥 TODAS TUS IMÁGENES (LAS MISMAS)
+const images = [
+"imagenuno.jpeg",
+"imagendos.jpeg",
+"imagentres.jpeg",
+"imagencuatro.jpeg",
+"imagencinco.jpeg",
+"imagenseis.jpeg",
+"imagensiete.jpeg",
+"imagenocho.jpeg",
+"imagennueve.jpeg",
+"imagendiez.jpeg",
+"imagenonce.jpeg",
+"imagendoce.jpeg",
+"imagentrece.jpeg",
+"imagencatorce.jpeg",
+"imagenquince.jpeg",
+"imagendieciseis.jpeg",
+"imagendiecisiete.jpeg"
 ];
 
-let currentGallery = [];
 let currentIndex = 0;
 
-function openGallery(index){
-    currentGallery = galleries[index];
-    currentIndex = 0;
+function openImage(index){
+    currentIndex = index;
     document.getElementById("lightbox").style.display = "flex";
     showImage();
 }
 
 function showImage(){
-    document.getElementById("lightbox-img").src = currentGallery[currentIndex];
+    document.getElementById("lightbox-img").src = images[currentIndex];
 }
 
 function nextImage(){
-    currentIndex = (currentIndex + 1) % currentGallery.length;
+    currentIndex = (currentIndex + 1) % images.length;
     showImage();
 }
 
 function prevImage(){
-    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
     showImage();
 }
 
