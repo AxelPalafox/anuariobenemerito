@@ -190,11 +190,12 @@ body {
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-    <img id="lightbox-img">
-    <div class="controls">
-        <button onclick="prevImage()">⬅</button>
-        <button onclick="nextImage()">➡</button>
-        <button onclick="closeLightbox()">Cerrar</button>
+    <img id="img">
+
+    <div>
+        <button onclick="prev()">⬅</button>
+        <button onclick="next()">➡</button>
+        <button onclick="closeBox()">Cerrar</button>
     </div>
 </div>
 
@@ -217,34 +218,58 @@ const galleries = [
 ["Yosselin Padilla.jpeg"]       
 ];
 
-let currentGallery = [];
-let currentIndex = 0;
+let index = 0;
 
-function openGallery(index){
-    currentGallery = galleries[index];
-    currentIndex = 0;
+function openGallery(i){
+    index = i;
     document.getElementById("lightbox").style.display = "flex";
-    showImage();
+    show();
 }
 
-function showImage(){
-    document.getElementById("lightbox-img").src = currentGallery[currentIndex];
+function show(){
+    document.getElementById("img").src = images[index];
 }
 
-function nextImage(){
-    currentIndex = (currentIndex + 1) % currentGallery.length;
-    showImage();
+function next(){
+    index++;
+
+    if(index >= images.length){
+        index = 0;
+    }
+
+    show();
 }
 
-function prevImage(){
-    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    showImage();
+function prev(){
+    index--;
+
+    if(index < 0){
+        index = images.length - 1;
+    }
+
+    show();
 }
 
-function closeLightbox(){
+function closeBox(){
     document.getElementById("lightbox").style.display = "none";
 }
 
+/* TECLADO */
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "ArrowRight"){
+        next();
+    }
+
+    if(e.key === "ArrowLeft"){
+        prev();
+    }
+
+    if(e.key === "Escape"){
+        closeBox();
+    }
+
+});
 </script>
 
 </body>
