@@ -7,109 +7,317 @@
 
 <style>
 
+:root {
+    --bg-gradient: linear-gradient(135deg, #f4f7f6 0%, #e0e8e5 100%);
+    --text-color: #333;
+    --header-bg: #425b53;
+    --title-color: #A6192E;
+    --card-bg: white;
+    --floating-shapes: rgba(166, 25, 46, 0.1);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    --text-color: #f4f7f6;
+    --header-bg: #1e2925;
+    --title-color: #fadbdb;
+    --card-bg: #2a2a2a;
+    --floating-shapes: rgba(255, 255, 255, 0.05);
+}
+
+/* Botón flotante */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--header-bg);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 3000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
 /* ===== BASE ===== */
-body{
-    margin:0;
-    font-family: Arial;
-    background:#f4f7f6;
+body {
+    margin: 0%;
+    background: var(--bg-gradient); /* ← Cambiado */
+    color: var(--text-color);       /* ← Cambiado */
+    min-height: 100vh;
 }
 
 /* HEADER */
-.header{
-    background: #425b53;
-    color:white;
-    text-align:center;
-    padding:20px;
+.header {
+    background: var(--header-bg);
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
+
 /* BOTÓN REGRESO */
 .back-button {
+    background: var(--header-bg);
     position: fixed;
     top: 20px;
     left: 20px;
-    background: #425b53;
     color: white;
     padding: 10px 15px;
     border-radius: 30px;
     text-decoration: none;
 }
+
 /* TITULO */
-.title{
-    text-align:center;
-    font-size:50px;
-    color:#A6192E;
-    margin:20px;
-}
-    
-/* GRID */
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:40px;
+.title {
+    text-align: center;
+    font-size: 50px;
+    color: var(--title-color);
+    margin: 20px;
 }
 
-.item{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
-    transition:0.3s;
-    cursor:pointer;
+/* GRID GALERIA */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px;
 }
 
-.item:hover{
-    transform:scale(1.05);
+/* CUADROS MEDIANOS */
+.item {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
 }
 
-.item img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
+.item:hover {
+   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-.caption{
-    padding:10px;
-    text-align:center;
-    font-weight:bold;
-    color:#333;
+.item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.4s ease; /* Transición suave para la imagen */
 }
 
-/* LIGHTBOX */
-.lightbox{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:9999;
+.item:hover img {
+    transform: scale(1.1); /* Efecto de zoom interno */
 }
 
-.lightbox img{
-    max-width:90%;
-    max-height:80%;
-    border-radius:10px;
+.caption {
+    padding: 10px;
+    text-align: center;
 }
 
-button{
-    margin:10px;
-    padding:10px 15px;
-    font-size:18px;
-    cursor:pointer;
-    border:none;
-    border-radius:5px;
-    background:#A6192E;
-    color:white;
+/* ===== LIGHTBOX ===== */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); /* Un poco menos oscuro para ver el fondo borroso */
+    backdrop-filter: blur(5px); /* Efecto de cristal esmerilado moderno */
+    display: none; justify-content: center; align-items: center;
+    flex-direction: column; z-index: 9999;
 }
 
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+.lightbox .controls {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+    pointer-events: none; /* Para no bloquear clics en la imagen */
+}
+
+.lightbox button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 15px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%; /* Botones circulares */
+    transition: all 0.3s ease;
+    pointer-events: auto; /* Reactivar clics en los botones */
+}
+
+.lightbox button:hover {
+    background: white;
+    color: #A6192E;
+}
+
+/* Botón de cerrar específico */
+.lightbox button.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.anuario-title {
+    font-size: 70px;
+    letter-spacing: 5px;
+    color: var(--title-color);
+    /* Nuevas propiedades para la animación */
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid #425b53; /* El cursor que parpadea */
+    width: 0;
+    margin: 0 auto;
+    animation: 
+        typing 2s steps(15, end) forwards,
+        blink-caret 0.75s step-end infinite;
+}
+
+/* Animación de tecleo */
+@keyframes typing {
+    from { width: 0; }
+    to { width: fit-content; }
+}
+
+/* Animación del cursor parpadeando */
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #425b53; }
+}
+.background-animado {
+    background: var(--floating-shapes);
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; /* Para que quede detrás de todo */
+    margin: 0; padding: 0;
+    overflow: hidden;
+    list-style: none;
+}
+
+.background-animado li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px; height: 20px;
+    background: rgba(166, 25, 46, 0.1); /* Tu color rojo institucional pero transparente */
+    animation: flotar 25s linear infinite;
+    bottom: -150px;
+    border-radius: 4px;
+}
+
+/* Tamaños y posiciones aleatorias para cada figura */
+.background-animado li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.background-animado li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.background-animado li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.background-animado li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.background-animado li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%; /* Se convierten en círculos al subir */
+    }
+}
+/* ===== PANTALLA DE CARGA ===== */
+#preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-gradient); /* Usa tu fondo actual */
+    z-index: 99999; /* Por encima de todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.loader-text {
+    font-size: 24px;
+    color: var(--title-color);
+    font-weight: bold;
+    letter-spacing: 2px;
+    animation: pulso 1.5s infinite;
+}
+
+@keyframes pulso {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+/* ===== EFECTO SCROLL REVEAL (Aparición de tarjetas) ===== */
+.item {
+    /* Modificamos el item actual para que nazca oculto y abajo */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+/* Clase que se agregará automáticamente al hacer scroll */
+.item.show-scroll {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ===== SCROLLBAR PERSONALIZADO ===== */
+/* 1. Ancho de la barra */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* 2. Fondo de la barra (Riel) */
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* 3. La barra deslizante (Pulgar) */
+::-webkit-scrollbar-thumb {
+    background-color: var(--header-bg); /* Verde de tu escuela */
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.3s ease;
+}
+
+/* 4. Color al pasar el ratón sobre la barra */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--title-color); /* Cambia al rojo institucional */
+}
 </style>
 </head>
 
 <body>
+       <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙</button>
+<div id="preloader">
+    <div class="loader-text">Cargando memorias...</div>
+</div>
+<ul class="background-animado">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 <a href="javascript:history.back()" class="back-button">⬅ Regresar</a>
 
 <div class="header">
@@ -171,7 +379,7 @@ button{
 </div>
 
 <div class="item" onclick="openGallery(10)">
-    <img src="Isabella Figueroa.jpeg">
+    <img src="mia figueroa.jpg">
     <div class="caption">Isabella Figueroa</div>
 </div>
 
@@ -182,7 +390,7 @@ button{
 
 <div class="item" onclick="openGallery(12)">
     <img src="Jaqueline.jpeg">
-    <div class="caption">Jaqueline</div>
+    <div class="caption">Jaqueline Guzman</div>
 </div>
 
 <div class="item" onclick="openGallery(13)">
@@ -224,44 +432,52 @@ button{
     <img src="Samantha Velazquez.jpeg">
     <div class="caption">Samantha Velazquez</div>
 </div>
-
+<div class="item" onclick="openGallery(21)">
+        <img src="Lenny.jpeg">
+        <div class="caption">Lenny Ayon</div>
+    </div>
+    <div class="item" onclick="openGallery(22)">
+        <img src="Yamel.jpeg">
+        <div class="caption">Yamel Gutierrez</div>
+    </div>
+    <div class="item" onclick="openGallery(23)">
+        <img src="Alejandra Paredes.jpeg">
+        <div class="caption">Alejandra Paredes</div>
+    </div>
+    <div class="item" onclick="openGallery(24)">
+        <img src="Melannie Patron.jpeg">
+        <div class="caption">Melannie Patron</div>
+    </div>
+    <div class="item" onclick="openGallery(25)">
+        <img src="argelia.jpg">
+        <div class="caption">Argelia</div>
+    </div>
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-    <img id="img">
-
-    <div>
+    <button class="close-btn" onclick="closeBox()">Cerrar</button>
+    
+    <div class="controls">
         <button onclick="prev()">⬅</button>
         <button onclick="next()">➡</button>
-        <button onclick="closeBox()">Cerrar</button>
     </div>
+
+    <img id="img">
 </div>
 
 <script>
 
 const images = [
-"Alexander Aguilar.jpeg",
-"Aleyka Paredes.jpeg",
-"Axel Saveedra.jpeg",
-"Aylin Paredes.jpeg",
-"Barbara Valenzuela.jpeg",
-"Camila Martinez.jpeg",
-"Dayana Rojas.jpeg",
-"Eduardo Muñoz.jpeg",
-"Emiliano Baez.jpeg",
-"Ian Aguilar.jpeg",
-"Isabella Figueroa.jpeg",
-"Ivanna Becerril.jpeg",
-"Jaqueline.jpeg",
-"Luis Bringas.jpeg",
-"Luna Alvarez.jpeg",
-"Manuel Cota.jpeg",
-"Maria Valdez.jpeg",
-"Mia Batanero.jpeg",
-"Michelle Valenzuela.jpeg",
-"Osvaldo Lopez.jpeg",
-"Samantha Velazquez.jpeg"
+"Alexander Aguilar.jpeg", "Aleyka Paredes.jpeg", "Axel Saveedra.jpeg",
+"Aylin Paredes.jpeg", "Barbara Valenzuela.jpeg", "Camila Martinez.jpeg",
+"Dayana Rojas.jpeg", "Eduardo Muñoz.jpeg", "Emiliano Baez.jpeg",
+"Ian Aguilar.jpeg", "mia figueroa.jpg", "Ivanna Becerril.jpeg",
+"Jaqueline.jpeg", "Luis Bringas.jpeg", "Luna Alvarez.jpeg",
+"Manuel Cota.jpeg", "Maria Valdez.jpeg", "Mia Batanero.jpeg",
+"Michelle Valenzuela.jpeg", "Osvaldo Lopez.jpeg", "Samantha Velazquez.jpeg",
+"Lenny.jpeg", "Yamel.jpeg", "Alejandra Paredes.jpeg", "Melannie Patron.jpeg",
+"argelia.jpg"
 ];
 
 let index = 0;
@@ -278,21 +494,13 @@ function show(){
 
 function next(){
     index++;
-
-    if(index >= images.length){
-        index = 0;
-    }
-
+    if(index >= images.length){ index = 0; }
     show();
 }
 
 function prev(){
     index--;
-
-    if(index < 0){
-        index = images.length - 1;
-    }
-
+    if(index < 0){ index = images.length - 1; }
     show();
 }
 
@@ -300,23 +508,59 @@ function closeBox(){
     document.getElementById("lightbox").style.display = "none";
 }
 
-/* TECLADO */
 document.addEventListener("keydown", function(e){
-
-    if(e.key === "ArrowRight"){
-        next();
-    }
-
-    if(e.key === "ArrowLeft"){
-        prev();
-    }
-
-    if(e.key === "Escape"){
-        closeBox();
-    }
-
+    if(e.key === "ArrowRight") next();
+    if(e.key === "ArrowLeft") prev();
+    if(e.key === "Escape") closeBox();
 });
 
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+<script>
+    VanillaTilt.init(document.querySelectorAll(".item"), {
+        max: 15,          // Inclinación máxima
+        speed: 400,       // Velocidad del efecto
+        glare: true,      // Agrega un efecto de brillo
+        "max-glare": 0.3  // Opacidad máxima del brillo
+    });
+    // Función para Modo Oscuro
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    const btn = document.getElementById("darkModeBtn");
+    if(document.body.classList.contains("dark-mode")) {
+        btn.innerText = "☀️";
+    } else {
+        btn.innerText = "🌙";
+    }
+}
+// ===== QUITAR PANTALLA DE CARGA =====
+window.addEventListener("load", function() {
+    const preloader = document.getElementById("preloader");
+    // Le damos un pequeño retraso de 0.8 segundos para que se alcance a leer
+    setTimeout(() => {
+        preloader.style.opacity = "0";
+        setTimeout(() => preloader.remove(), 500);
+    }, 800);
+});
+
+// ===== ANIMACIÓN DE SCROLL PARA LAS TARJETAS =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        // Cuando la tarjeta entra en la pantalla, le agregamos la clase que la hace visible
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show-scroll");
+            // Dejamos de observarla para que no se repita la animación al subir
+            observer.unobserve(entry.target); 
+        }
+    });
+}, { 
+    threshold: 0.15 // Se activa cuando el 15% de la foto ya es visible
+});
+
+// Aplicamos el observador a todas las tarjetas
+document.querySelectorAll('.item').forEach((el) => {
+    observer.observe(el);
+});
 </script>
 
 </body>
